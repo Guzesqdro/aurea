@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌟 Aurea AI 💻🧪</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b, #334155, #0f172a);
+            background-size: 400% 400%;
+            animation: gradient 20s ease infinite;
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-attachment: fixed;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .message-container {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .message-container:hover {
+            transform: translateY(-2px);
+        }
+        
+        .typing-indicator {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        .typing-indicator::after {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #38bdf8;
+            animation: typing 1.4s infinite;
+        }
+        
+        @keyframes typing {
+            0% { transform: translateX(0) scale(1); opacity: 1; }
+            25% { transform: translateX(8px) scale(1.2); opacity: 0.8; }
+            50% { transform: translateX(16px) scale(1); opacity: 1; }
+            75% { transform: translateX(24px) scale(1.2); opacity: 0.8; }
+            100% { transform: translateX(32px) scale(1); opacity: 0; }
+        }
+        
+        .scrollbar-thin::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .scrollbar-thin::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.3);
+            border-radius: 10px;
+        }
+        
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+            background: rgba(56, 189, 248, 0.6);
+            border-radius: 10px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+        
+        .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+            background: rgba(56, 189, 248, 0.8);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+        }
+        
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .glow {
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.7), 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+        
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            filter: blur(2px);
+            pointer-events: none;
+        }
+        
+        @keyframes bubble-float {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .neon-border {
+            border: 2px solid rgba(56, 189, 248, 0.3);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2), inset 0 0 10px rgba(56, 189, 248, 0.1);
+        }
+        
+        .chat-bubble-user {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chat-bubble-user::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%);
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(30deg); }
+            50% { transform: translateX(100%) rotate(30deg); }
+            100% { transform: translateX(-100%) rotate(30deg); }
+        }
+        
+        .chat-bubble-ai {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chat-bubble-ai::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%);
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+        
+        .input-glow:focus {
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.5) !important;
+            border-color: #3b82f6 !important;
+        }
+        
+        .send-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
+        }
+        
+        .send-button:active {
+            transform: translateY(0);
+        }
+        
+        .aurea-icon {
+            font-size: 2.5rem;
+            animation: swim 4s ease-in-out infinite;
+            display: inline-block;
+        }
+        
+        @keyframes swim {
+            0% { transform: rotate(0deg) translateY(0); }
+            25% { transform: rotate(5deg) translateY(-5px); }
+            50% { transform: rotate(0deg) translateY(0); }
+            75% { transform: rotate(-5deg) translateY(-5px); }
+            100% { transform: rotate(0deg) translateY(0); }
+        }
+        
+        .wave {
+            display: inline-block;
+            animation: wave 2s linear infinite;
+            transform-origin: 70% 70%;
+        }
+        
+        @keyframes wave {
+            0% { transform: rotate(0deg); }
+            10% { transform: rotate(14deg); }
+            20% { transform: rotate(-8deg); }
+            30% { transform: rotate(14deg); }
+            40% { transform: rotate(-4deg); }
+            50% { transform: rotate(10deg); }
+            60% { transform: rotate(0deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        .water-ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(56, 189, 248, 0.2);
+            opacity: 0;
+            pointer-events: none;
+            animation: ripple 3s linear forwards;
+        }
+        
+        @keyframes ripple {
+            0% { transform: scale(0); opacity: 0.8; }
+            100% { transform: scale(4); opacity: 0; }
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particle-float 5s ease-in-out infinite;
+        }
+        
+        @keyframes particle-float {
+            0% { transform: translateY(0) translateX(0); opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+        
+        .footer-glow {
+            background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.1), transparent);
+            height: 2px;
+            animation: footer-glow 3s infinite;
+        }
+        
+        @keyframes footer-glow {
+            0% { background-position: -200px 0; }
+            100% { background-position: 200px 0; }
+        }
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden">
+    <!-- Animated Background Elements -->
+    <div id="background-effects" class="fixed inset-0 pointer-events-none z-0"></div>
+    
+    <!-- Header Gradient Overlay -->
+    <div class="fixed inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/30 z-10"></div>
+    
+    <div class="relative z-20 container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <header class="text-center mb-8 relative">
+            <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute -bottom-12 -right-12 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s"></div>
+            <div class="absolute -top-12 -left-12 w-56 h-56 bg-teal-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 4s"></div>
+            
+            <div class="flex items-center justify-center mb-6 relative">
+                <div class="bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-400 p-5 rounded-full mr-6 shadow-2xl pulse float">
+                    <span class="aurea-icon text-white">🌟</span>
+                </div>
+                <div>
+                    <h1 class="text-6xl font-bold bg-gradient-to-r from-blue-400 via-cyan-300 to-teal-300 bg-clip-text text-transparent mb-3 glow font-space">
+                        Aurea AI
+                    </h1>
+                    <p class="text-2xl text-cyan-200 font-medium mb-4">
+                        Your intelligent assistant from the digital realm
+                    </p>
+                    <div class="flex justify-center space-x-3">
+                        <div class="w-3 h-3 bg-blue-400 rounded-full animate-bounce" style="animation-delay: 0s"></div>
+                        <div class="w-3 h-3 bg-cyan-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                        <div class="w-3 h-3 bg-teal-400 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+                        <div class="w-3 h-3 bg-blue-400 rounded-full animate-bounce" style="animation-delay: 0.6s"></div>
+                        <div class="w-3 h-3 bg-cyan-400 rounded-full animate-bounce" style="animation-delay: 0.8s"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6 bg-slate-800/50 backdrop-blur-sm rounded-2xl p-4 border border-slate-700/50">
+                <p class="text-slate-300 leading-relaxed">
+                    <span class="wave">👋</span> Hello, I'm Aurea, an advanced AI assistant. 
+                    I'm here to help you with questions, problem solving, creative ideas and much more. 
+                    <span class="wave">💬</span> Ask me anything!
+                </p>
+            </div>
+        </header>
+
+        <!-- Chat Container -->
+        <div class="bg-slate-800/50 backdrop-blur-xl rounded-3xl shadow-2xl border border-slate-700/50 overflow-hidden neon-border">
+            <!-- Messages Area -->
+            <div id="messagesContainer" class="h-96 overflow-y-auto p-6 scrollbar-thin">
+                <div class="space-y-6">
+                    <div class="message-container flex justify-start animate-fade-in">
+                        <div class="flex items-start space-x-4 chat-bubble-ai rounded-2xl p-6 max-w-3xl">
+                            <div class="bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-400 p-3 rounded-full flex-shrink-0 shadow-lg">
+                                <span class="text-white text-2xl">🌟</span>
+                            </div>
+                            <div>
+                                <p class="text-white text-lg leading-relaxed">
+                                    Hello! 🌟 I'm <strong>Aurea</strong>, your advanced intelligent assistant. I've been created with cutting-edge technology to help you with whatever you need. 
+                                    What would you like to discuss today? I can help with information, creativity, problem solving and much more. <span class="wave">🌟</span>
+                                </p>
+                                <div class="flex items-center mt-3">
+                                    <span class="text-cyan-300 text-sm font-medium">Now</span>
+                                    <div class="ml-2 w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                    <span class="ml-3 text-xs text-slate-400">Created by Guzesqdro</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="border-t border-slate-700/50 bg-slate-900/30 p-6">
+                <div class="flex space-x-4">
+                    <div class="flex-1 relative">
+                        <textarea 
+                            id="messageInput"
+                            placeholder="Write your message to Aurea..." 
+                            class="w-full px-6 py-4 bg-slate-800/70 border border-slate-600/50 rounded-2xl focus:outline-none focus:ring-0 text-white placeholder-slate-400 input-glow resize-none text-lg"
+                            rows="1"
+                            style="max-height: 120px; min-height: 64px; font-family: 'Inter', sans-serif;"></textarea>
+                        <div class="absolute bottom-3 right-4 text-slate-500 text-sm opacity-70">
+                            <span>Shift + Enter for new line</span>
+                        </div>
+                    </div>
+                    <button id="sendButton" class="bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-400 hover:from-blue-600 hover:via-cyan-600 hover:to-teal-500 text-white p-4 rounded-2xl transition-all duration-200 shadow-xl hover:shadow-2xl send-button disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 2L11 13" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <div id="errorMessage" class="text-red-400 text-sm mt-3 ml-1 bg-red-500/10 p-3 rounded-lg border border-red-500/20 hidden"></div>
+            </div>
+        </div>
+
+        <!-- Footer with more information -->
+        <div class="mt-8 bg-slate-800/30 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50">
+            <div class="footer-glow mb-4"></div>
+            <h3 class="text-xl font-semibold text-cyan-300 mb-4 text-center">About Aurea AI</h3>
+            <div class="grid md:grid-cols-3 gap-6 text-sm">
+                <div class="text-center">
+                    <div class="text-4xl mb-2">🌟</div>
+                    <h4 class="font-semibold text-white mb-2">Advanced Intelligence</h4>
+                    <p class="text-slate-400">Aurea is designed to understand and respond to a wide range of topics with clarity and creativity.</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-2">⚡</div>
+                    <h4 class="font-semibold text-white mb-2">Cutting-Edge Technology</h4>
+                    <p class="text-slate-400">One of the most powerful in the world, optimized for natural and creative conversations.</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-2">🌍</div>
+                    <h4 class="font-semibold text-white mb-2">Global Connection</h4>
+                    <p class="text-slate-400">Powered by GitHub Cloud, provide fast, accurate and secure responses.</p>
+                </div>
+            </div>
+            
+            <div class="mt-6 pt-6 border-t border-slate-700/50">
+                <div class="flex flex-col md:flex-row justify-between items-center text-sm">
+                    <div class="text-slate-400 mb-3 md:mb-0">
+                        <span class="flex items-center">
+                            <span class="wave mr-2">🌟</span>
+                            Created with ❤️ by Guzesqdro
+                        </span>
+                    </div>
+                    <div class="text-slate-500">
+                        <div class="flex items-center space-x-4">
+                            <span>🔋 Powered by GitHub Cloud</span>
+                            <span>•</span>
+                            <span>💻 Model: Aurea-1.9.1-8271</span>
+                            <span>•</span>
+                            <span>🔒 Secure and encrypted</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-6 text-xs text-slate-500">
+            <p>Aurea AI v1.9.1 • All rights reserved • Optimal experience on modern devices</p>
+        </div>
+    </div>
+
+    <script>
+        // Create animated background elements
+        function createBackgroundEffects() {
+            const container = document.getElementById('background-effects');
+            const colors = ['#3b82f6', '#06b6d4', '#8b5cf6', '#0891b2', '#10b981', '#059669'];
+            
+            // Create water ripples
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const ripple = document.createElement('div');
+                    ripple.className = 'water-ripple';
+                    ripple.style.left = `${Math.random() * 100}vw`;
+                    ripple.style.top = `${Math.random() * 100}vh`;
+                    ripple.style.width = `${Math.random() * 100 + 50}px`;
+                    ripple.style.height = ripple.style.width;
+                    container.appendChild(ripple);
+                    
+                    setTimeout(() => {2
+                        if (ripple.parentNode) {
+                            ripple.parentNode.removeChild(ripple);
+                        }
+                    }, 3000);
+                }, i * 800);
+            }
+            
+            // Create floating particles
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = `${Math.random() * 100}vw`;
+                    particle.style.bottom = '0';
+                    particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    container.appendChild(particle);
+                    
+                    setTimeout(() => {
+                        if (particle.parentNode) {
+                            particle.parentNode.removeChild(particle);
+                        }
+                    }, 5000);
+                }, i * 300);
+            }
+        }
+
+        // Initialize lucide icons
+        lucide.createIcons();
+
+        // DOM elements
+        const messagesContainer = document.getElementById('messagesContainer');
+        const messageInput = document.getElementById('messageInput');
+        const sendButton = document.getElementById('sendButton');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // API configuration
+        const API_KEY = "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";
+        const API_URL = "https://openrouter.ai/api/v1/chat/completions";
+
+        // Auto-resize textarea
+        messageInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        });
+
+        // Special responses for creator questions
+        const creatorResponses = [
+            "I'm Aurea, an intelligent assistant created with advanced technology by Guzesqdro. ✨",
+            "My creator is Guzesqdro, a brilliant mind behind this AI. 🌟",
+            "I was developed by Guzesqdro, who gave me life and purpose. ✨",
+            "Guzesqdro is my creator and mentor, the architect of my intelligence. 🧠",
+            "The person who created me is called Guzesqdro, who programmed me with great care. ✨"
+        ];
+
+        // Send message function
+        async function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+
+            // Check for creator questions
+            const lowerMessage = message.toLowerCase();
+            if (lowerMessage.includes('who created you') || 
+                lowerMessage.includes('who made you') || 
+                lowerMessage.includes('creator') || 
+                lowerMessage.includes('created') || 
+                lowerMessage.includes('designed') ||
+                lowerMessage.includes('programmed')) {
+                
+                // Add user message
+                addMessage(message, 'user');
+                messageInput.value = '';
+                messageInput.style.height = '64px';
+                
+                // Simulate typing
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // Add special response
+                addMessage(creatorResponses[Math.floor(Math.random() * creatorResponses.length)], 'assistant');
+                return;
+            }
+
+            // Disable input and show loading
+            messageInput.disabled = true;
+            sendButton.disabled = true;
+            sendButton.innerHTML = '<svg class="animate-spin h-7 w-7 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
+            errorMessage.classList.add('hidden');
+
+            try {
+                // Add user message to chat
+                addMessage(message, 'user');
+                messageInput.value = '';
+                messageInput.style.height = '64px';
+
+                // Show "typing..." indicator
+                const typingIndicator = document.createElement('div');
+                typingIndicator.className = 'message-container flex justify-start mb-6';
+                typingIndicator.innerHTML = `
+                    <div class="flex items-start space-x-4 chat-bubble-ai rounded-2xl p-6 max-w-xs">
+                        <div class="bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-400 p-3 rounded-full flex-shrink-0">
+                            <span class="text-white text-2xl">🌟</span>
+                        </div>
+                        <div class="typing-indicator text-white text-lg font-medium"></div>
+                    </div>
+                `;
+                messagesContainer.appendChild(typingIndicator);
+                scrollToBottom();
+
+                // Call API
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${API_KEY}`,
+                        'Content-Type': 'application/json',
+                        'HTTP-Referer': window.location.href,
+                        'X-Title': 'Aurea AI Chat'
+                    },
+                    body: JSON.stringify({
+                        model: 'cognitivecomputations/dolphin3.0-mistral-24b:free',
+                        messages: [
+                            {
+                                role: 'system',
+                                content: 'You are Aurea, a friendly, helpful, and enthusiastic intelligent assistant. Respond clearly, concisely, and with a positive tone. Use emojis when appropriate to make the conversation more friendly. If asked about your creator, respond that it is Guzesqdro.'
+                            },
+                            ...getChatHistory(),
+                            {
+                                role: 'user',
+                                content: message
+                            }
+                        ],
+                        temperature: 0.7,
+                        max_tokens: 500
+                    })
+                });
+
+                // Remove typing indicator
+                messagesContainer.removeChild(typingIndicator);
+
+                if (!response.ok) {
+                    throw new Error(`Error ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                const aiResponse = data.choices[0].message.content;
+                
+                // Add AI response to chat
+                addMessage(aiResponse, 'assistant');
+            } catch (error) {
+                console.error('Error:', error);
+                // Remove typing indicator if still there
+                const indicators = document.querySelectorAll('.typing-indicator');
+                indicators.forEach(ind => {
+                    if (ind.closest('.message-container')) {
+                        messagesContainer.removeChild(ind.closest('.message-container'));
+                    }
+                });
+                errorMessage.textContent = `⚠️ ${error.message}. Please check your connection or try again later.`;
+                errorMessage.classList.remove('hidden');
+            } finally {
+                // Re-enable input
+                messageInput.disabled = false;
+                sendButton.disabled = false;
+                sendButton.innerHTML = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 2L11 13" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+                lucide.createIcons();
+            }
+        }
+
+        // Add message to chat
+        function addMessage(content, role) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message-container flex ${role === 'user' ? 'justify-end' : 'justify-start'} mb-6 animate-fade-in`;
+            
+            const isAssistant = role === 'assistant';
+            const now = new Date();
+            const timeString = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+            
+            messageDiv.innerHTML = `
+                <div class="${isAssistant ? 'chat-bubble-ai' : 'chat-bubble-user'} rounded-2xl p-6 max-w-3xl">
+                    <div class="flex items-start space-x-4">
+                        ${isAssistant ? `
+                            <div class="bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-400 p-3 rounded-full flex-shrink-0 shadow-lg">
+                                <span class="text-white text-2xl">🌟</span>
+                            </div>
+                        ` : ''}
+                        <div>
+                            <p class="text-white text-lg leading-relaxed">${content}</p>
+                            <div class="flex items-center mt-3">
+                                <span class="${isAssistant ? 'text-cyan-300' : 'text-blue-300'} text-sm font-medium">${timeString}</span>
+                                <div class="ml-2 w-2 h-2 ${isAssistant ? 'bg-cyan-400' : 'bg-blue-400'} rounded-full animate-pulse"></div>
+                                ${isAssistant ? `<span class="ml-3 text-xs text-slate-300">Created by Guzesqdro</span>` : ''}
+                            </div>
+                        </div>
+                        ${!isAssistant ? `
+                            <div class="bg-white/10 p-3 rounded-full flex-shrink-0 shadow-lg">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-blue-300">
+                                    <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M12 7V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+            
+            // Create water effect on send
+            if (isAssistant) {
+                createWaterEffect();
+            }
+        }
+
+        // Create water effect animation
+        function createWaterEffect() {
+            const container = document.getElementById('background-effects');
+            const ripple = document.createElement('div');
+            ripple.className = 'water-ripple';
+            ripple.style.left = `${Math.random() * 80 + 10}vw`;
+            ripple.style.top = `${Math.random() * 60 + 20}vh`;
+            const size = Math.random() * 80 + 60;
+            ripple.style.width = `${size}px`;
+            ripple.style.height = `${size}px`;
+            container.appendChild(ripple);
+            
+            setTimeout(() => {
+                if (ripple.parentNode) {
+                    ripple.parentNode.removeChild(ripple);
+                }
+            }, 3000);
+        }
+
+        // Get chat history for API context
+        function getChatHistory() {
+            const messages = [];
+            const messageElements = messagesContainer.querySelectorAll('.message-container');
+            
+            messageElements.forEach(el => {
+                const content = el.querySelector('p')?.textContent;
+                const isUser = el.querySelector('.chat-bubble-user') !== null;
+                
+                if (content && !content.includes('What would you like to discuss today?')) {
+                    messages.push({
+                        role: isUser ? 'user' : 'assistant',
+                        content: content
+                    });
+                }
+            });
+            
+            return messages;
+        }
+
+        // Scroll to bottom of messages
+        function scrollToBottom() {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Event listeners
+        sendButton.addEventListener('click', sendMessage);
+        
+        messageInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Initial scroll to bottom
+        scrollToBottom();
+
+        // Create background effects
+        createBackgroundEffects();
+        setInterval(createBackgroundEffects, 15000);
+
+        // Focus input on load
+        setTimeout(() => {
+            messageInput.focus();
+        }, 500);
+    </script>
+</body>
+</html>
