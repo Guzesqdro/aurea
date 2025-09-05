@@ -29,8 +29,9 @@ Aurea isn't just another AI assistant - she's a luminous presence in the digital
 
 ## 🚀 Quick Start
 
-1. **open the website**
+1. **Open the website**
 
 Open [Aurea AI](https://guzesqdro.github.io/aurea)
 
+2. **Enjoy 🥳**
   
