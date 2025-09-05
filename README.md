@@ -28,4 +28,4 @@ Aurea isn't just another AI assistant - she's a luminous presence in the digital
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/Guzesqdro/Aurea-AI.git
+Open https://guzesqdro.github.io/aurea
