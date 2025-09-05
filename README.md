@@ -28,6 +28,6 @@ Aurea isn't just another AI assistant - she's a luminous presence in the digital
 
 1. **open the website**
 
-Open ![Aurea AI](https://guzesqdro.github.io/aurea)
+Open [Aurea AI](https://guzesqdro.github.io/aurea)
 
   
