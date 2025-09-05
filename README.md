@@ -26,6 +26,8 @@ Aurea isn't just another AI assistant - she's a luminous presence in the digital
 
 ## 🚀 Quick Start
 
-1. **Clone the repository**
-```bash
-Open https://guzesqdro.github.io/aurea
+1. **open the website**
+
+Open ![Aurea AI](https://guzesqdro.github.io/aurea)
+
+  
