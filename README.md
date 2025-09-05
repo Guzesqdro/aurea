@@ -11,13 +11,16 @@
 ⚡ **Lightning Fast** - Instant responses powered by cutting-edge technology  
 🔒 **Secure & Private** - Your conversations remain confidential with end-to-end encryption  
 🌍 **Global Knowledge** - Access to up-to-date information across countless domains  
+📢 **Ad-Less** - No intrusive ads all over the website
+💸 **100% Free** - No paid versions, but if you want to donate follow me on IG [@guzesqdro](https://instagram.com/guzesqdro) 🥳
+
 
 ## 🛠️ Technology Stack
 
-- 🐬 **Powered by**: Dolphin3.0-Mistral-24B architecture
-- 🔗 **Network**: OpenRouter distributed AI network
+- 🐬 **Powered by**: Aurea-1.0-B12
+- 🔗 **Network**: GitHub Cloud Powered
 - 💻 **Framework**: HTML5, Tailwind CSS, JavaScript
-- 🌐 **API**: OpenRouter AI API
+- 🌐 **API**: Private (By the moment)
 - 🎨 **Design**: Modern gradient aesthetics with smooth animations
 
 ## 🎯 Why Choose Aurea?
