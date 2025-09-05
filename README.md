@@ -2,7 +2,7 @@
 
 ✨ **Aurea** is a radiant, advanced AI assistant that brings intelligence, creativity, and elegance to your digital experience. Like a guiding star in the digital cosmos, Aurea illuminates your path with knowledge, insights, and endless possibilities. 🚀
 
-![Aurea AI Banner](https://placehold.co/800x300/1e293b/38bdf8?text=Aurea+AI+-+Intelligent+Assistant)
+![Aurea AI Banner](https://i.imgur.com/2LNOTj6.jpeg)
 
 ## ✨ Features
 
